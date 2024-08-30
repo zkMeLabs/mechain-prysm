@@ -15,6 +15,7 @@ type SecretKey interface {
 // PublicKey represents a BLS public key.
 type PublicKey interface {
 	Marshal() []byte
+	Serialize() []byte
 	Copy() PublicKey
 	Aggregate(p2 PublicKey) PublicKey
 	IsInfinite() bool
@@ -28,5 +29,6 @@ type Signature interface {
 	FastAggregateVerify(pubKeys []PublicKey, msg [32]byte) bool
 	Eth2FastAggregateVerify(pubKeys []PublicKey, msg [32]byte) bool
 	Marshal() []byte
+	Serialize() []byte
 	Copy() Signature
 }

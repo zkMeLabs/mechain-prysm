@@ -262,6 +262,14 @@ func (s *Signature) Marshal() []byte {
 	return s.s.Compress()
 }
 
+// Serialize a signature into a LittleEndian byte slice.
+func (s *Signature) Serialize() []byte {
+	// return s.s.Serialize()
+	SignatureRaw := new(blstSignatureRaw)
+	SignatureRaw.FromAffine(s.s)
+	return SignatureRaw.Serialize()
+}
+
 // Copy returns a full deep copy of a signature.
 func (s *Signature) Copy() common.Signature {
 	sign := *s.s

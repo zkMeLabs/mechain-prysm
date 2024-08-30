@@ -81,6 +81,14 @@ func (p *PublicKey) Marshal() []byte {
 	return p.p.Compress()
 }
 
+// Serialize a public key into a LittleEndian byte slice.
+func (p *PublicKey) Serialize() []byte {
+	// return p.p.Serialize()
+	PublicKeyRaw := new(blstPublicKeyRaw)
+	PublicKeyRaw.FromAffine(p.p)
+	return PublicKeyRaw.Serialize()
+}
+
 // Copy the public key to a new pointer reference.
 func (p *PublicKey) Copy() common.PublicKey {
 	np := *p.p
